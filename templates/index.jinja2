@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/sitio.css') }}" />
+        <script src="{{ url_for('static', filename='js/q.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/wgssStuSdk.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/fx_stu_envia.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/fx_stu_firma.js') }}"></script>
+        <link rel="icon" href="{{ url_for('static', filename='img/cas_favicon.png') }}" type="image/png" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Prueba de concepto: Firma de documentos en Núcleo Web</h1>
+            <p class="mt">La siguiente es una prueba de concepto para la firma de documentos (inicialmente GES, pero podría ser también otros documentos que lo requieran) por medio de un Pad físico (Wacom) de manera presencial.</p>
+            <p>Esta es una aplicación web (similar a Núcleo Web), en que simularemos el flujo de presentación del documento al paciente, proceso de firma, y construcción del documento firmado.</p>
+            <h3 class="mt">1. Selección de modo de firma</h3>
+            <p>La propuesta es <em>agregar</em> un nuevo mecanismo de firma, aparte de los existentes:</p>
+            <p><img src="{{ url_for('static', filename='img/ges-warning-popup.png') }}" alt="Popup GES" class="center"></p>
+            <p><img src="{{ url_for('static', filename='img/opciones-firma-pad.png') }}" alt="Opciones firma" class="center"></p>
+            <h3 class="mt">2. Envío de documento a Pad para lectura del paciente</h3>
+            <p>El Pad Wacom puede mostrar, de manera paginada, una previsualización del documento. El envío de las páginas se hace desde el computador, no es autónomo desde el pad. Debemos considerar la forma más cómoda para dar visualización al paciente (podría ser una vista "resumida" con los aspectos principales de lo que va a firmar).</p>
+            <h4 class="mt">Demo Time!</h4>
+            <p>
+                <table>
+                    <tr>
+                        <td>
+                            <img src="{{ url_for('static', filename='img/preview-ges-1.png') }}" alt="GES Página 1" class="center thumb" id="pagina1">
+                        </td>
+                        <td>
+                            <img src="{{ url_for('static', filename='img/preview-ges-2.png') }}" alt="GES Página 2" class="center thumb" id="pagina2">
+                        </td>
+                        <td></td>
+                        <td>
+                            <img class="center firma" id="signatureImage" src="#" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="btn center" type="button" value="Enviar página 1" onClick="SendToSTU('pagina1');" title="Enviar página 1" />
+                        </td>
+                        <td>
+                            <input class="btn center" type="button" value="Enviar página 2" onClick="SendToSTU('pagina2');" title="Enviar página 2" />
+                        </td>
+                        <td>
+                            <input class="btn center" type="button" value="Limpia pantalla" onClick="ClearSTU();" title="Limpia pantalla" />
+                        </td>
+                        <td>
+                            <input class="btn center" type="button" id="signButton" value="Inicia firma" onClick="tabletDemo()" />
+                        </td>
+                    </tr>
+                </table>
+            </p>
+            <textarea cols="125" rows="15" id="txtDisplay" style="display:hidden"></textarea>
+        </div>
+    </body>
+</html>
